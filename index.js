@@ -10,6 +10,27 @@ window.addEventListener('load', function(){
   document.querySelector('form').addEventListener('submit', searchGithub)
 })
 
+function renderRepoList(arr) {
+  // clear query input 
+  document.getElementById('query').value = ''
+
+  // grab tbody tags to insert repo info to HTLM (DOM)
+  let tbody = document.getElementById('repo-list')
+
+  arr.forEach((el, i) => {
+    // debugger
+    let val = `
+      <tr>
+        <td>${i + 1}</td>
+        <td><a href=${el.html_url}>${el.name}</a></td>
+        <td>${el.owner.login}</td>
+        <td>${el.fork}</td>
+      </tr>
+    `
+    tbody.innerHTML += val;
+  })
+  
+}
 
 // e == event
 function searchGithub(e){
@@ -26,7 +47,7 @@ function searchGithub(e){
   // fetch(BASE_URL + '/search/repositories?q=' + query)
   fetch(BASE_URL + `/search/repositories?q=${query}`)
     .then(function(resp) {return resp.json()})
-    .then(objs => {debugger})
+    .then(objs => renderRepoList(objs.items))
 
 
 }
