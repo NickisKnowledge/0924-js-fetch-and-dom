@@ -19,12 +19,14 @@ function searchGithub(e){
 
   const BASE_URL = 'https://api.github.com'
   let query = document.getElementById('query').value
+
   // EX: https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
   // using concatenetion to create query
   // fetch(BASE_URL + '/search/repositories?q=' + query)
   fetch(BASE_URL + `/search/repositories?q=${query}`)
-  .then(resp => console.log(resp.json()))
+    .then(function(resp) {return resp.json()})
+    .then(objs => {debugger})
 
 
 }
