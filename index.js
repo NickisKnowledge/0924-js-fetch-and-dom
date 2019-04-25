@@ -19,28 +19,18 @@ function renderRepoList(arr) {
 
   arr.forEach((el, i) => {
     // debugger
-    let val = '<tr>' +
-        '<td>' + (i + 1) + '</td>' +
-        '<td>' + 
-          '<a href=' + el.html_url + '>' + 
-          el.name +
-          '</a>' + 
-        '</td>' +
-        '<td>' + el.owner.login + '</td>'+
-        '<td>' + el.fork + '</td>' +
-      '</tr>'
-    
+    let val =`
+      <tr>
+        <td>${i+1}</td>
+        <td>${el.name }</td>
+        <td><a href=${el.html_url }>${el.owne.login }</a></td>
+        <td>${el.form }</td>
+      </tr>
+    `
     tbody.innerHTML += val;
   })
 
-  let val = `
-    <tr>
-      <td>${i+1}</td>
-      <td>${el.name }</td>
-      <td><a href=${el.html_url }>${el.owne.login }</a></td>
-      <td>${el.form }</td>
-    </tr>
-  `
+
   
 }
 
@@ -59,7 +49,10 @@ function searchGithub(e){
   // fetch(BASE_URL + '/search/repositories?q=' + query)
   fetch(BASE_URL + `/search/repositories?q=${query}`)
     .then(function(resp) {return resp.json()})
-    .then(objs => renderRepoList(objs.items))
+    .then(objs => {
+      debugger
+      renderRepoList(objs.items)
+    })
 
 
 }
